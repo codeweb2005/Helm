@@ -10,17 +10,34 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
-    {{- range .Values.ingress.hosts }}
     - http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: /api/user/
+            pathType: Prefix
             backend:
               service:
-                name: {{ .service }}
+                name: {{ .Values.services.userService.name }}
                 port:
-                  number: {{ index $.Values.services (printf "%sService" (.service | replace "-service" "" | camelcase)) "port" }}
-          {{- end }}
-    {{- end }}
+                  number: {{ .Values.services.userService.port }}
+          - path: /api/device
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.services.deviceService.name }}
+                port:
+                  number: {{ .Values.services.deviceService.port }}
+          - path: /api/cart
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.services.cartService.name }}
+                port:
+                  number: {{ .Values.services.cartService.port }}
+          - path: /api/order
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.services.orderService.name }}
+                port:
+                  number: {{ .Values.services.orderService.port }}
 {{- end }}

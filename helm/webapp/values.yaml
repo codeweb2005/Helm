@@ -38,18 +38,3 @@ ingress:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-path: /health
     external-dns.alpha.kubernetes.io/hostname: eksdevops2.daohaithuan.click
-  hosts:
-    - host: eksdevops2.daohaithuan.click
-      paths:
-        - path: /api/user/
-          pathType: Prefix
-          service: user-service
-        - path: /api/device
-          pathType: Prefix
-          service: device-service
-        - path: /api/cart
-          pathType: Prefix
-          service: cart-service
-        - path: /api/order
-          pathType: Prefix
-          service: order-service
