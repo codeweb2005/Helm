@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.services.userService.name }}
+  labels:
+    app: {{ .Values.services.userService.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.services.userService.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.services.userService.name }}
+    spec:
+      containers:
+      - name: {{ .Values.services.userService.name }}
+        image: {{ .Values.image.repository }}/{{ .Values.services.userService.image }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: {{ .Values.services.userService.port }}
+        env:
+        - name: PORT
+          value: "{{ .Values.services.userService.port }}"
+        - name: MONGODB_URI
+          value: "{{ .Values.mongodb.uri }}"
+        - name: JWT_SECRET
+          value: "{{ .Values.jwt.secret }}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.services.userService.name }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.services.userService.name }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: {{ .Values.services.userService.port }}
+      targetPort: {{ .Values.services.userService.port }}

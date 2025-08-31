@@ -1,0 +1,55 @@
+replicaCount: 2
+
+image:
+  repository: thuan912005
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+services:
+  userService:
+    name: user-service
+    port: 4001
+    image: user
+  deviceService:
+    name: device-service
+    port: 4002
+    image: device
+  orderService:
+    name: order-service
+    port: 4003
+    image: order
+  cartService:
+    name: cart-service
+    port: 4004
+    image: cart
+
+mongodb:
+  uri: "mongodb+srv://thuan912005:912005za@cluster0.t01az3e.mongodb.net/food-del"
+
+jwt:
+  secret: "random#secret"
+
+ingress:
+  enabled: true
+  className: "alb"
+  annotations:
+    alb.ingress.kubernetes.io/load-balancer-name: ingress-alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /health
+    external-dns.alpha.kubernetes.io/hostname: eksdevops2.daohaithuan.click
+  hosts:
+    - host: eksdevops2.daohaithuan.click
+      paths:
+        - path: /api/user/
+          pathType: Prefix
+          service: user-service
+        - path: /api/device
+          pathType: Prefix
+          service: device-service
+        - path: /api/cart
+          pathType: Prefix
+          service: cart-service
+        - path: /api/order
+          pathType: Prefix
+          service: order-service

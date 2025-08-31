@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.services.cartService.name }}
+  labels:
+    app: {{ .Values.services.cartService.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.services.cartService.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.services.cartService.name }}
+    spec:
+      containers:
+      - name: {{ .Values.services.cartService.name }}
+        image: {{ .Values.image.repository }}/{{ .Values.services.cartService.image }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: {{ .Values.services.cartService.port }}
+        env:
+        - name: PORT
+          value: "{{ .Values.services.cartService.port }}"
+        - name: MONGODB_URI
+          value: "{{ .Values.mongodb.uri }}"
+        - name: JWT_SECRET
+          value: "{{ .Values.jwt.secret }}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.services.cartService.name }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.services.cartService.name }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: {{ .Values.services.cartService.port }}
+      targetPort: {{ .Values.services.cartService.port }}

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.services.deviceService.name }}
+  labels:
+    app: {{ .Values.services.deviceService.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.services.deviceService.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.services.deviceService.name }}
+    spec:
+      containers:
+      - name: {{ .Values.services.deviceService.name }}
+        image: {{ .Values.image.repository }}/{{ .Values.services.deviceService.image }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: {{ .Values.services.deviceService.port }}
+        env:
+        - name: PORT
+          value: "{{ .Values.services.deviceService.port }}"
+        - name: MONGODB_URI
+          value: "{{ .Values.mongodb.uri }}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.services.deviceService.name }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.services.deviceService.name }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: {{ .Values.services.deviceService.port }}
+      targetPort: {{ .Values.services.deviceService.port }}
