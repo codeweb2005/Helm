@@ -36,5 +36,5 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: {{ .Values.services.deviceService.port }}
+      port: 80
       targetPort: {{ .Values.services.deviceService.port }}
