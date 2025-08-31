@@ -18,26 +18,26 @@ spec:
               service:
                 name: {{ .Values.services.userService.name }}
                 port:
-                  number: 80
+                  number: 4000
           - path: /api/device
             pathType: Prefix
             backend:
               service:
                 name: {{ .Values.services.deviceService.name }}
                 port:
-                  number: 80
+                  number: 4000
           - path: /api/cart
             pathType: Prefix
             backend:
               service:
                 name: {{ .Values.services.cartService.name }}
                 port:
-                  number: 80
+                  number: 4000
           - path: /api/order
             pathType: Prefix
             backend:
               service:
                 name: {{ .Values.services.orderService.name }}
                 port:
-                  number: 80
+                  number: 4000
 {{- end }}
