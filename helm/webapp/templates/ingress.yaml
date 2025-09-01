@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-alb
+  name: {{ include "webapp.fullname" . }}-ingress
   annotations:
     {{- range $key, $value := .Values.ingress.annotations }}
     {{ $key }}: {{ $value | quote }}
@@ -10,9 +10,11 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
-  - hosts:
-    - "*.daohaithuan.click"
+    - hosts:
+        - eksdevops2.daohaithuan.click
+      secretName: eksdevops2-tls
   rules:
+    - host: eksdevops2.daohaithuan.click
       http:
         paths:
           - path: /api/user/
