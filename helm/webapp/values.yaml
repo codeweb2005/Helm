@@ -51,3 +51,6 @@ ingress:
   tls:
     enabled: true
     secretName: tls-secret
+
+metricsServer:
+  enabled: true
