@@ -38,5 +38,5 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 4000
+      port: {{ .Values.services.cartService.port }}
       targetPort: {{ .Values.services.cartService.port }}

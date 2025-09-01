@@ -9,8 +9,11 @@ metadata:
     {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
+  tls:
+  - hosts:
+    - "*.daohaithuan.click"
   rules:
-    - http:
+      http:
         paths:
           - path: /api/user/
             pathType: Prefix
@@ -18,26 +21,26 @@ spec:
               service:
                 name: {{ .Values.services.userService.name }}
                 port:
-                  number: 4000
+                  number: {{ .Values.services.userService.port }}
           - path: /api/device
             pathType: Prefix
             backend:
               service:
                 name: {{ .Values.services.deviceService.name }}
                 port:
-                  number: 4000
+                  number: {{ .Values.services.deviceService.port }}
           - path: /api/cart
             pathType: Prefix
             backend:
               service:
                 name: {{ .Values.services.cartService.name }}
                 port:
-                  number: 4000
+                  number: {{ .Values.services.cartService.port }}
           - path: /api/order
             pathType: Prefix
             backend:
               service:
                 name: {{ .Values.services.orderService.name }}
                 port:
-                  number: 4000
+                  number: {{ .Values.services.orderService.port }}
 {{- end }}
