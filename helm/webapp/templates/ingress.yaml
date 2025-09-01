@@ -46,12 +46,5 @@ spec:
               service:
                 name: {{ .Values.services.orderService.name }}
                 port:
-                  number: {{ .Values.services.orderService.port }}
-          - path: /prometheus
-            pathType: Prefix
-            backend:
-              service:
-                name: prometheus-server
-                port:
-                  number: 9090 # Prometheus default port                 
+                  number: {{ .Values.services.orderService.port }}              
 {{- end }}
