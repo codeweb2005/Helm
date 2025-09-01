@@ -13,10 +13,6 @@ spec:
     metadata:
       labels:
         app: {{ .Values.services.deviceService.name }}
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "{{ .Values.services.deviceService.port }}"
-        prometheus.io/path: "/metrics"
     spec:
       containers:
       - name: {{ .Values.services.deviceService.name }}

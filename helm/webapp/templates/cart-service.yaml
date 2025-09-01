@@ -13,10 +13,6 @@ spec:
     metadata:
       labels:
         app: {{ .Values.services.cartService.name }}
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "{{ .Values.services.cartService.port }}"
-        prometheus.io/path: "/metrics"
     spec:
       containers:
       - name: {{ .Values.services.cartService.name }}
