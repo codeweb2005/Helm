@@ -51,10 +51,3 @@ ingress:
   tls:
     enabled: true
     secretName: tls-secret
-
-monitoring:
-  prometheus:
-    enabled: true
-  grafana:
-    enabled: true
-    adminPassword: "admin123"
