@@ -5,7 +5,7 @@ autoscaling:
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 30
-  targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 30
 
 image:
   repository: thuan912005
