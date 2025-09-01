@@ -26,6 +26,13 @@ spec:
           value: "{{ .Values.mongodb.uri }}"
         - name: JWT_SECRET
           value: "{{ .Values.jwt.secret }}"
+        resources: #set resource limits and requests
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
 ---
 apiVersion: v1
 kind: Service
