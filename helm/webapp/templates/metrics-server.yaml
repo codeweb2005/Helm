@@ -27,8 +27,13 @@ metadata:
   name: system:metrics-server
 rules:
 - apiGroups: [""]
-  resources: ["pods", "nodes", "nodes/stats", "namespaces", "configmaps"]
+  resources: ["pods", "nodes", "nodes/stats", "nodes/metrics", "namespaces", "configmaps"]
   verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["nodes/proxy"]
+  verbs: ["get", "create"]
+- nonResourceURLs: ["/metrics"]
+  verbs: ["get"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -119,6 +124,11 @@ spec:
         - --kubelet-use-node-status-port
         - --metric-resolution=15s
         - --kubelet-insecure-tls
+        - --requestheader-client-ca-file=/etc/ca-certificates/ca-certificates.crt
+        - --requestheader-allowed-names=aggregator
+        - --requestheader-extra-headers-prefix=X-Remote-Extra-
+        - --requestheader-group-headers=X-Remote-Group
+        - --requestheader-username-headers=X-Remote-User
         image: registry.k8s.io/metrics-server/metrics-server:v0.6.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
