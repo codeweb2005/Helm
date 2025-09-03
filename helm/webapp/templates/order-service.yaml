@@ -22,8 +22,6 @@ spec:
         env:
         - name: PORT
           value: "{{ .Values.services.orderService.port }}"
-        - name: MONGODB_URI
-          value: "{{ .Values.mongodb.uri }}"
         - name: JWT_SECRET
           value: "{{ .Values.jwt.secret }}"
         resources:

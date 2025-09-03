@@ -22,8 +22,6 @@ spec:
         env:
         - name: PORT
           value: "{{ .Values.services.deviceService.port }}"
-        - name: MONGODB_URI
-          value: "{{ .Values.mongodb.uri }}"
         resources:
           requests:
             cpu: 100m

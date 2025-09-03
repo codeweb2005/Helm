@@ -30,9 +30,6 @@ services:
     port: 4004
     image: cart
 
-mongodb:
-  uri: "mongodb+srv://thuan912005:912005za@cluster0.t01az3e.mongodb.net/food-del"
-
 jwt:
   secret: "random#secret"
 
