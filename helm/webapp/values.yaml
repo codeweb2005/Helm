@@ -1,17 +1,14 @@
 replicaCount: 2
-
 autoscaling:
   enabled: true
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 30
   targetMemoryUtilizationPercentage: 30
-
 image:
   repository: thuan912005
   pullPolicy: IfNotPresent
-  tag: "latest"
-
+  tag: "1fa42dde4404053d51738038d33ab8995a4db63a"
 services:
   userService:
     name: user-service
@@ -29,10 +26,8 @@ services:
     name: cart-service
     port: 4004
     image: cart
-
 jwt:
   secret: "random#secret"
-
 ingress:
   enabled: true
   className: "alb"
