@@ -118,9 +118,3 @@ This repository contains **Helm charts and manifests** used to deploy Kubernetes
 4. ArgoCD automatically detects changes, synchronizes the cluster, and updates the deployed resources.
 
 ---
-
-## Best Practices
-- **Version Control**: Tag releases in the Helm chart (`Chart.yaml`) to track changes and ensure reproducible deployments.
-- **Environment-Specific Values**: Use separate `values-<env>.yaml` files (e.g., `values-prod.yaml`, `values-dev.yaml`) for different environments.
-- **Validation**: Test Helm templates locally using `helm template .` before pushing changes.
-- **ArgoCD Sync Policies**: Configure `prune` and `selfHeal` appropriately to avoid unintended resource deletions or manual drift.
