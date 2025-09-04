@@ -1,3 +1,8 @@
+Ok, mình sẽ viết thêm một file **README.md** dành riêng cho repo Helm của bạn. Repo này sẽ mô tả vai trò của từng thành phần (values, templates) và cách dùng với ArgoCD.
+
+---
+
+```markdown
 # Helm Repository for Device Microservices
 
 ## Overview
@@ -120,3 +125,9 @@ This repository contains **Helm charts and manifests** used to deploy Kubernetes
 
 ---
 
+```
+
+---
+
+Bạn có muốn mình viết thêm 1 **example `values.yaml`** đầy đủ (image, env, service, ingress, resources) để repo Helm này có thể chạy demo ngay không?
+```
