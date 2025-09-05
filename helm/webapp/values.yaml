@@ -8,7 +8,7 @@ autoscaling:
 image:
   repository: thuan912005
   pullPolicy: IfNotPresent
-  tag: "05798386d9d4a59f073a4091deccab4b00ba59c2"
+  tag: "844052f5687012f3229fa7f77a7e86850ee8b8e6"
 services:
   userService:
     name: user-service
